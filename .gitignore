@@ -110,8 +110,8 @@ print_reqs.py
 # mkdocs site
 site
 
-# notebook for learning
-*.ipynb
+
+
 
 temp*
 
