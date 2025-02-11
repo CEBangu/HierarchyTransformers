@@ -119,4 +119,9 @@ temp*
 language_models_as_hierarchy_encoders.pdf
 
 # Latex stuff
-report/
+*.aux
+*.log
+*.fls
+*.gz
+*.fdb_latexmk
+*.tex
