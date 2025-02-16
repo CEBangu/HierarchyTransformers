@@ -24,6 +24,12 @@ from yacs.config import CfgNode
 from hierarchy_transformers.datasets import load_hf_dataset
 from hierarchy_transformers.evaluation import HierarchyTransformerEvaluator
 from hierarchy_transformers.models import HierarchyTransformer
+import torch
+import os
+
+# Force CPU usage
+import os
+os.environ["PYTORCH_NO_MPS"] = "1"
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stderr)])
 logger = logging.getLogger(__name__)
@@ -41,6 +47,8 @@ def main(config_file: str, output_path: str):
     # NOTE: according to docs, it is very important to have column names ["child", "parent", "negative"] *in order* to match ["anchor", "positive", "negative"]
     pair_dataset = load_hf_dataset(config.dataset_path, config.dataset_name + "-Pairs")
     model = HierarchyTransformer.from_pretrained(model_name_or_path=config.model_path, revision=config.revision)
+
+    model = model.to('cpu') # There is some bug in metal backend that causes the script to crash. Unfortunately you need to switch to CPU. 
 
     # 2. Run validation for hyerparameter selection
     val_evaluator = HierarchyTransformerEvaluator(
