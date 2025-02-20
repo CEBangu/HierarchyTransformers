@@ -1,0 +1,3 @@
+[submodule "dim_reduce"]
+	path = dim_reduce
+	url = https://github.com/HazyResearch/HoroPCA.git
