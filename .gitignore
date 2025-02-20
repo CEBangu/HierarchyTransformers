@@ -101,7 +101,7 @@ data_scripts/*.ipynb
 logmap-log.out
 
 # experiments
-experiments/
+# experiments/
 run.mondo.sh
 run.umls.sh
 
